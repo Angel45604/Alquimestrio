@@ -1,0 +1,51 @@
+<div *ngIf="megustanlosmemes">
+  <mat-progress-bar color='accent' mode="query"></mat-progress-bar>
+</div>
+<div class="container">
+    <img class="fondo" src="assets/Puerquimica1.png" alt="Fondo">
+  <div class="row">
+    <form id="form1" (ngSubmit)="generateCompound()">
+      <div class="input-field col s12 m6 offset-m3">
+        <!--<input class="form-control form-group" [formControl]="compoundFormControl" matInput placeholder="Compuesto"[(ngModel)]="compoundTxt" name="compoundTxt" [errorStateMatcher]="matcher" type="text">
+        <mat-error *ngIf="compoundFormControl.hasError('required') || compoundFormControl.hasError('invalid')">
+          Ingresa un compuesto Válido
+        </mat-error>-->
+          <input required="true" [ngClass]="status ? 'validate' : 'invalid'" id="compound" type="text" [autofocus]="true" (keydown)="checkCompound($event)" placeholder="Compuesto" [formControl]="compoundTxt" name="compoundTxt">
+          <label for="compound" data-error="Compuesto inválido">Compuesto</label>
+      <br>
+          <div class="col s12 m6 offset-m5 offset-s5 offset-l5">
+              <a class="waves-effect waves-light btn okbtn" id="btn" (click)="generateCompound()">Ok</a>
+          </div>
+          
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col s12 m6">
+      <collapsible-list id="compoundList1" [type]="'expandable'">
+        <collapsible-list-item *ngFor="let compound of compounds1">
+          <collapsible-header class="waves-effect">
+            <div class="left"><i class="material-icons">arrow_drop_down</i>{{compound.compoundName}}</div>
+            <div class="right"><a (click)="removeCompound(compound.count, 1)"><i class="material-icons">close</i></a></div>
+          </collapsible-header>
+          <collapsible-body [expanded]="false">
+              <img (click)="openDialog(compound.compoundName, compound.compoundSrc)" class="materialboxed" style="display:block;margin:auto;" src="{{compound.compoundSrc}}">
+          </collapsible-body>
+        </collapsible-list-item>
+      </collapsible-list>
+      </div>
+      <div class="col s12 m6">
+          <collapsible-list [type]="'expandable'">
+            <collapsible-list-item *ngFor="let compound of compounds2">
+              <collapsible-header class="waves-effect">
+                <div class="left"><i class="material-icons">arrow_drop_down</i>{{compound.compoundName}}</div>
+                <div class="right"><a (click)="removeCompound(compound.count, 2)"><i class="material-icons">close</i></a></div>
+              </collapsible-header>
+              <collapsible-body [expanded]="false">
+                  <img (click)="openDialog(compound.compoundName, compound.compoundSrc)" class="materialboxed" style="display:block;margin:auto;" src="{{compound.compoundSrc}}">
+              </collapsible-body>
+            </collapsible-list-item>
+          </collapsible-list>
+      </div>
+  </div>
+</div>

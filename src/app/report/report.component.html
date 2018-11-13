@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Reportar</h2>
+<mat-dialog-content>
+    <form (ngSubmit)="reportCompound(data.compoundName, data.compoundSrc)" fxLayout="row">
+        <mat-form-field class="example-full-width">
+      <textarea maxlength="255" class="form-control form-group" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" [formControl]="detail" name="detail" matInput required="true"  placeholder="Detalles del Reporte"></textarea>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="example-full-width">
+          <mat-select placeholder="Categoria" class="form-control from-group" [formControl]="catFormControl"  name="cat" [errorStateMatcher]="matcher">
+            <mat-option *ngFor="let cat of cats" [value]="cat.value">
+              {{ cat.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="catFormControl.hasError('required') || catFormControl.hasError('minLength')">
+                  Elige una Categoria
+          </mat-error>
+        </mat-form-field>
+      <br>
+      <button class="btn waves-effect waves-light" type="submit">Reportar
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+
+</mat-dialog-content>

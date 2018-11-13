@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+            <form id="form1" (ngSubmit)="login()">
+                    <div class="input-field col s12 m6 offset-m3">
+                      
+                        <input required="true" id="email" type="email"  placeholder="Email" [(ngModel)]="email" name="email" required>
+                        <input required="true" id="password" type="password"  placeholder="Password" [(ngModel)]="password" name="password" required>
+                    <br>
+                        <input type="submit">
+                        
+                    </div>
+            </form>
+    </div>
+</div>

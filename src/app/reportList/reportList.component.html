@@ -1,0 +1,18 @@
+<table matSort (matSortChange)="sortData($event)" class="mat-elevation-z8">
+  <tr>
+    <th mat-sort-header="id">Id</th>
+    <th mat-sort-header="name">Nombre</th>
+    <th mat-sort-header="category">Categoria</th>
+    <th mat-sort-header="detail">Detalle</th>
+    <th mat-sort-header="date">Fecha</th>
+    <th mat-sort-header="url">URL</th>
+  </tr>
+  <tr *ngFor="let compound of sortedData">
+    <td>{{compound.id}}</td>
+    <td>{{compound.name}}</td>
+    <td>{{compound.category}}</td>
+    <td>{{compound.detail}}</td>
+    <td>{{compound.date | date: short}}</td>
+    <td>{{compound.url}}</td>
+  </tr>
+</table>

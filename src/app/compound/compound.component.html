@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{data.compoundName}}</h2>
+<a (click)="reportCompound2(data.compoundName, data.compoundSrc)"><i class="material-icons">announcement</i></a>
+<mat-dialog-content>
+  <img style="width:100%;display:block" src="{{data.compoundSrc}}" alt="">
+  <div *ngIf="data.details">
+    <h6>IUPAC</h6>
+    <p>{{data.iupac}}</p>
+    <mat-divider></mat-divider>
+    <h6>InChI</h6>
+    <p>{{data.inchi}}</p>
+    <mat-divider></mat-divider>
+    <h6>Fórmula Molecular</h6>
+    <p>{{data.molecularFormula}}</p>
+    <mat-divider></mat-divider>
+    <h6>Peso Molecular</h6>
+    <p>{{data.molecularWeight}}</p>
+    <mat-divider></mat-divider>
+    <h6>SMILES</h6>
+    <p>{{data.smiles}}</p>
+  </div>
+</mat-dialog-content>
+
+
