@@ -36,7 +36,7 @@ export class CompoundService {
 
      generateSMILES(translatedCompound: string):Observable<any> {
         let url = this.smilesURL+translatedCompound+"/smiles";
-        console.log(url);
+        console.log(url, 'INSIDESMILES');
         return this.http.get(url)
                         .map((res:Response) => res.text())
      }
@@ -46,6 +46,14 @@ export class CompoundService {
          console.log(url);
          return this.http.get(url)
                          .map((res:Response) => res.json())
+     }
+
+     getCompoundUri(encodedSMILES):Observable<any> {
+        //let url = `http://3.17.152.165:8080/molecule/${x}`;
+        let url = `http://localhost:4500/molecule/${encodedSMILES}`;
+        console.log(url, 'SMILES');
+        return this.http.get(url)
+                        .map((res:Response) => res.json())
      }
      
 }

@@ -42,6 +42,7 @@ export class AppComponent implements OnInit, OnChanges {
   iterate = false;
   status = true;
   details = false;
+  setSMILES = false;
 
   ngOnInit() {
     console.log(this.compounds1);
@@ -61,6 +62,7 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   generateCompound() {
+    console.log(this.setSMILES,'SETSMILES')
       EmmiterService.get('request').subscribe(res => {
         this.megustanlosmemes = true;
         console.log(`MEGUSTANLOSMEMES ${res}`);
@@ -71,11 +73,35 @@ export class AppComponent implements OnInit, OnChanges {
       response => {
         console.log(response.data.translations[0].translatedText);
         this.translatedCompound = response.data.translations[0].translatedText;
-        this.generateSMILES();
+        if(this.setSMILES) {
+          this.getImage(this.compoundTxt.value);
+        } else {
+          this.generateSMILES();
+        }
       },
       err => {
         console.log(err);
       });
+    }
+    getImage(uri) {
+      this.status = false;
+      this.megustanlosmemes = false;
+      const x = encodeURIComponent(uri);
+        console.log(x, 'ENCODED');
+        this.compoundSrc = `http://13.59.131.1:8080/molecule/${x}`;
+        //this.compoundSrc = `http://localhost:4500/molecule/${x}`;
+
+        if (this.iterate) {
+          this.compounds1.push({ compoundName: this.compoundTxt.value, compoundNameEn: this.translatedCompound, compoundSrc: this.compoundSrc, count: this.count });
+          this.iterate = !this.iterate;
+        } else {
+          this.compounds2.push({ compoundName: this.compoundTxt.value, compoundNameEn: this.translatedCompound, compoundSrc: this.compoundSrc, count: this.count });
+          this.iterate = !this.iterate;
+        }
+        this.count++;
+        this.compoundSrc = '';
+        this.compoundTxt.setValue('');
+        this.status = true;
     }
 
   generateSMILES() {
@@ -93,20 +119,7 @@ export class AppComponent implements OnInit, OnChanges {
         this.megustanlosmemes = false;
 
         // console.log(response);
-        const x = encodeURIComponent(response);
-        console.log(this.compounds1);
-        this.compoundSrc = `http://localhost:4500/molecule/${x}`;
-        if (this.iterate) {
-          this.compounds1.push({ compoundName: this.compoundTxt.value, compoundSrc: this.compoundSrc, count: this.count });
-          this.iterate = !this.iterate;
-        } else {
-          this.compounds2.push({ compoundName: this.compoundTxt.value, compoundSrc: this.compoundSrc, count: this.count });
-          this.iterate = !this.iterate;
-        }
-        this.count++;
-        this.compoundSrc = '';
-        this.compoundTxt.setValue('');
-        this.status = true;
+        this.getImage(response);
       },
       err => {
         console.log(this.status);
@@ -140,8 +153,8 @@ export class AppComponent implements OnInit, OnChanges {
     }
   }
 
-  openDialog(compoundName, compoundSrc) {
-    this.compoundService.getCompoundInfo(compoundName)
+  openDialog(compoundName, compoundNameEn, compoundSrc) {
+    this.compoundService.getCompoundInfo(compoundNameEn)
     .subscribe(
       response => {
         console.log(response.PC_Compounds[0].props);
@@ -151,10 +164,19 @@ export class AppComponent implements OnInit, OnChanges {
           response => {
             this.details = true;
             const iupac = response.data.translations[0].translatedText;
-            const dialogRef = this.dialog.open(CompoundComponent, {
-              height: '90%',
-              data: { details: this.details, compoundName, compoundSrc, iupac, inchi: props[11].value.sval, molecularFormula: props[14].value.sval, molecularWeight: props[16].value.fval, smiles: props[17].value.sval },
-            });
+            let dialogRef
+            if(props.length == 21) {
+              dialogRef = this.dialog.open(CompoundComponent, {
+                height: '90%',
+                data: { details: this.details, compoundName, compoundSrc, iupac, inchi: props[11].value.sval, molecularFormula: props[15].value.sval, molecularWeight: props[16].value.fval, smiles: props[17].value.sval },
+              });
+            } else if (props.length == 20) {
+              dialogRef = this.dialog.open(CompoundComponent, {
+                height: '90%',
+                data: { details: this.details, compoundName, compoundSrc, iupac, inchi: props[11].value.sval, molecularFormula: props[14].value.sval, molecularWeight: props[15].value.fval, smiles: props[17].value.sval },
+              });
+            }
+            
 
             dialogRef.afterClosed().subscribe(result => {
               console.log(`Dialog result: ${result}`);
