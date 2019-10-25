@@ -8,8 +8,8 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class CompoundService {
      constructor (private http: Http) {}
-     private translateURL = 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyAVTjIDdVpxk4xW885S7ysm-aVjf1mmT2g&source=ES&target=EN&q=';  
-     private untranlateURL = 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyAVTjIDdVpxk4xW885S7ysm-aVjf1mmT2g&source=EN&target=ES&q=';
+     private translateURL = 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyAfsWjLnNWWZ6I5HgGfwYEB984RWpfsMXw&source=ES&target=EN&q=';  
+     private untranlateURL = 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyAfsWjLnNWWZ6I5HgGfwYEB984RWpfsMXw&source=EN&target=ES&q=';
      private smilesURL = 'https://cactus.nci.nih.gov/chemical/structure/'
 
      translateCompound(compound: string){
@@ -49,7 +49,7 @@ export class CompoundService {
      }
 
      getCompoundUri(encodedSMILES):Observable<any> {
-        //let url = `http://3.17.152.165:8080/molecule/${x}`;
+        //let url = `http://3.17.56.131:8080/molecule/${encodedSMILES}`;
         let url = `http://localhost:4500/molecule/${encodedSMILES}`;
         console.log(url, 'SMILES');
         return this.http.get(url)
