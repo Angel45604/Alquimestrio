@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.18",
-    "@angular/cli": "~8.2.0",
+    "@angular/cli": "~8.3.18",
     "@angular/compiler-cli": "^8.2.13",
     "@angular/language-service": "^6.1.0",
     "@types/jasmine": "~2.8.6",
@@ -59,6 +59,6 @@
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
     "tslint-config-airbnb": "^5.11.0",
-    "typescript": "~2.7.2"
+    "typescript": "~3.5.3"
   }
 }
