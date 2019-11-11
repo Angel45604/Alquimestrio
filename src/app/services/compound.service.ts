@@ -49,8 +49,8 @@ export class CompoundService {
      }
 
      getCompoundUri(encodedSMILES):Observable<any> {
-        //let url = `http://3.17.56.131:8080/molecule/${encodedSMILES}`;
-        let url = `http://localhost:4500/molecule/${encodedSMILES}`;
+        let url = `http://3.17.56.131:8080/molecule/${encodedSMILES}`;
+        //let url = `http://localhost:4500/molecule/${encodedSMILES}`;
         console.log(url, 'SMILES');
         return this.http.get(url)
                         .map((res:Response) => res.json())

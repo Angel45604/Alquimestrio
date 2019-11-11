@@ -88,7 +88,7 @@ export class AppComponent implements OnInit, OnChanges {
       this.megustanlosmemes = false;
       const x = encodeURIComponent(uri);
         console.log(x, 'ENCODED');
-        this.compoundSrc = `http://13.59.131.1:8080/molecule/${x}`;
+        this.compoundSrc = `http://3.17.56.131:8080/molecule/${x}`;
         //this.compoundSrc = `http://localhost:4500/molecule/${x}`;
 
         if (this.iterate) {
