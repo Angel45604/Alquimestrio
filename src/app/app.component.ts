@@ -175,6 +175,13 @@ export class AppComponent implements OnInit, OnChanges {
                 height: '90%',
                 data: { details: this.details, compoundName, compoundSrc, iupac, inchi: props[11].value.sval, molecularFormula: props[14].value.sval, molecularWeight: props[15].value.fval, smiles: props[17].value.sval },
               });
+            } else if(props.length == 22) {
+              dialogRef = this.dialog.open(CompoundComponent, {
+                height: '90%',
+                data: { details: this.details, compoundName, compoundSrc, iupac, inchi: props[12].value.sval, molecularFormula: props[16].value.sval, molecularWeight: props[17].value.fval, smiles: props[18].value.sval },
+              });
+            } else {
+              console.log(props);
             }
             
 
